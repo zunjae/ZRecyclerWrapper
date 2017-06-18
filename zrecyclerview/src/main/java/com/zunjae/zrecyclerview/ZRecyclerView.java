@@ -16,12 +16,31 @@ public final class ZRecyclerView {
 
     private static final String TAG = "Builder";
 
-    private Context context;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    @NonNull
+    private final Context context;
+
+    @NonNull
+    private final RecyclerView recyclerView;
+
+    @NonNull
+    private final RecyclerView.Adapter adapter;
+
+    /**
+     * The column count when in portrait
+     */
     private int columnSizePortrait = 1;
+
+    /**
+     * The column count when in landscape
+     */
     private int columnSizeLandscape = -1;
+
+    /**
+     * The user selected LayoutManager type, by default Linear until specified by user
+     */
     private LayoutManagerType layoutManagerType = LayoutManagerType.LINEAR;
+
+    private RecyclerView.LayoutManager layoutManager;
 
     public ZRecyclerView(@NonNull Context context,
                          @NonNull RecyclerView recyclerView,
@@ -58,13 +77,16 @@ public final class ZRecyclerView {
         return this;
     }
 
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return layoutManager;
+    }
+
     public void build() {
         if (layoutManagerType != LayoutManagerType.LINEAR && columnSizeLandscape < 0) {
             Log.i(TAG, "[build] No landscape column count set, assuming portrait");
             columnSizeLandscape = columnSizePortrait;
         }
 
-        RecyclerView.LayoutManager layoutManager;
         int spanCount;
         boolean isPortrait = OrientationUtil.phoneIsInPortrait(context);
         if (isPortrait) {
