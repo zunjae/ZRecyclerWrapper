@@ -81,7 +81,7 @@ public final class ZRecyclerView {
         return layoutManager;
     }
 
-    public void build() {
+    public ZRecyclerView build() {
         if (layoutManagerType != LayoutManagerType.LINEAR && columnSizeLandscape < 0) {
             Log.i(TAG, "[build] No landscape column count set, assuming portrait");
             columnSizeLandscape = columnSizePortrait;
@@ -112,5 +112,6 @@ public final class ZRecyclerView {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        return this;
     }
 }
