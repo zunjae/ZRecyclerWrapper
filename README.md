@@ -16,7 +16,7 @@ Add the dependency:
 
 ```java
 dependencies {
-    compile 'com.github.zunjae:ZRecyclerWrapper:0.9'
+    compile 'com.github.zunjae:ZRecyclerWrapper:0.11'
 }
 ```
 
